@@ -1,0 +1,117 @@
+grammar Jet;
+
+options {
+	language=Java;
+	output = AST;
+	rewrite = true;
+}
+
+tokens {
+    JET_EXPRESSION;
+    JET_DIRECTIVE;
+    JET_COMMENT;
+    JET_SCRIPTLET;
+    ATTRIBUTE;
+    ATTRIBUTES;
+}
+
+@header {
+package com.tikal.codegen.jet.parser;
+}
+
+@lexer::header {
+package com.tikal.codegen.jet.parser;
+}
+
+@lexer::members {
+
+	enum Quote { NONE, SINGLE, DOUBLE};
+	Quote quote = Quote.NONE;
+    boolean directive = false;
+    
+	void trim(int front, int back) {
+		text = getText();
+	    setText( text.substring( front, text.length() - back ) );
+	}
+}
+
+document
+	: 
+	(
+		child
+	)*
+	EOF!
+	;
+
+child
+	: jetContent
+	;
+
+jetContent
+	:
+	jetDirective
+	| JET_EXPRESSION
+	| JET_COMMENT
+	| JET_SCRIPTLET 
+	| TEXT
+	;
+
+jetDirective
+	: JET_DIRECTIVE_OPEN name=ID (
+		attributes+=jetAttribute
+	) * JET_DIRECTIVE_CLOSE
+	-> ^( JET_DIRECTIVE $name ^( ATTRIBUTES $attributes* ) )
+	;
+
+jetAttribute
+	: name=ID ATTR_EQ value=ATTR_VALUE
+	-> ^( ATTRIBUTE $name $value )
+	;
+
+fragment NAMECHAR : LETTER | DIGIT | '.' | '-' | '_' | ':' ;
+fragment DIGIT : '0'..'9' ;
+fragment LETTER : 'a'..'z' | 'A'..'Z' ;
+
+WHITESPACE
+	: { directive }?=> (' '|'\r'|'\t'|'\u000C'|'\n') { $channel = HIDDEN; }
+	;
+
+JET_COMMENT
+	: '<%--' ( options { greedy = false; } : . )* '--%>' { trim( 4, 4 );}
+	;
+
+JET_EXPRESSION
+	: '<%=' ( options { greedy = false; } : . )* '%>' { trim( 3, 2 );}
+	;
+
+JET_SCRIPTLET
+	: '<%' ~( '@' | '=' | '-' ) ( options { greedy = false; } : . )* '%>' { trim( 2, 2 ); }
+	;
+
+JET_DIRECTIVE_OPEN
+	: { !directive }?=> '<%@' {directive = true;}
+	;
+
+JET_DIRECTIVE_CLOSE
+	: { directive }?=> '%>' {directive = false;}
+	;
+
+ID
+    : { directive }?=> ( LETTER | '_' | ':' ) ( NAMECHAR )*
+    ;
+
+ATTR_EQ
+	: { directive }?=> '=' 
+	;
+	
+ATTR_VALUE
+	: { directive }?=> (
+	'\'' ( options { greedy = false; } : . )* '\'' 
+	| '\"' ( options { greedy = false; } : . )* '\"'
+	) { trim( 1, 1 );}
+	;
+
+TEXT options {greedy = false;}
+	: { !directive }?=> .
+	;
+	

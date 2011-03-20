@@ -1,0 +1,12 @@
+<%@ jet class="ClassGenerator" package="org.examples.generators" %>
+
+class A
+{
+	int[] a = new int[3];
+	public A()
+	{
+<% for (int i=0; i < 3; i++) {%>
+    	a[<%=i%>] = <%=i%>;
+<%}%>
+	}
+}

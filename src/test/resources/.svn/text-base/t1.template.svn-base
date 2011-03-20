@@ -1,0 +1,13 @@
+<%@ jet class="TestClass" package="pckg.test" %>
+<html>
+<% int i=0;%>
+<head>
+<%@ include file="t11.include" %>
+</head>
+<body>
+<% for (i=0; i < 2; i++) {%>
+<h1><%=i%></h1>
+<%}%>
+</body>
+<%@ include file="t12.include" %>
+</html>

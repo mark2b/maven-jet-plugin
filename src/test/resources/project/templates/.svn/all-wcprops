@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/repos/!svn/ver/7421/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/project/templates
+END
+t2.template
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/repos/!svn/ver/7415/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/project/templates/t2.template
+END
+t1.template
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/repos/!svn/ver/7421/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/project/templates/t1.template
+END

@@ -1,0 +1,23 @@
+ ------
+ Tikal Maven JET Pugin
+ ------
+ Tikal Knowledge
+ ------
+ October 2008
+ ------
+
+
+Maven JET Pugin
+
+ Maven JET Pugin allow generate soure code of the Java Emmiters from the templates. 
+ For more information about JET, please refer to {{{jet.html}JET Overview}}.
+ 
+* Goals Overview
+  The JET Plugin has one goal:
+  
+    * {{{generate-mojo.html}jet:generate}} Generates file(s) to a target directory based on template file(s).
+
+* Usage
+  
+  Instructions on how to use the JET Plugin can be found {{{usage.html}here}}.
+ 

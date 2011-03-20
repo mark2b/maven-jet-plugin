@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Tikal Maven-JET-Plugin">
+	<bannerLeft>
+		<name>Tikal</name>
+		<src>images/bannerLeft.jpg</src>
+		<href>http://www.tikalk.com</href>
+	</bannerLeft>
+	<bannerRight>
+		<alt>Tikal Suites</alt>
+		<src>images/banner.jpg</src>
+	</bannerRight>
+	<skin>
+		<groupId>com.tikal.maven</groupId>
+		<artifactId>tikal-maven-skin</artifactId>
+		<version>2008.2-SNAPSHOT</version>
+	</skin>
+	<body>
+		<links>
+			<item name="tikal" href="http://tikal.sourceforge.net" />
+			<item name="tikal@sf" href="http://sourceforge.net/projects/tikal/" />
+			<item name="tikalk.com" href="http://www.tikalk.com/" />
+		</links>
+
+		<menu name="Overview">
+			<item name="Introduction to JET" href="jet.html" />
+			<item name="Introduction" href="index.html" />
+			<item name="Goals" href="plugin-info.html" />
+			<item name="Usage" href="usage.html" />
+		</menu>
+		${reports}
+	</body>
+</project>

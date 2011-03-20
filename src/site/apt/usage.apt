@@ -1,0 +1,81 @@
+ ------
+ Usage
+ ------
+ Tikal Knowledge
+ ------
+ October 2008
+ ------
+
+
+Usage
+
+  The JET Plugin generates Java Emitter source files based on template file(s). The following examples describe the basic usage of the Plugin.
+
+* Generate Java Emitters Source Files From JET Template File(s)
+
+ You must configure the JET Plugin as follow:
+ 
+----------------------------------------
+<project>
+...
+  <build>
+    <plugins>
+      ...
+      <plugin>
+          <groupId>com.tikal.maven</groupId>
+          <artifactId>tikal-maven-jet-plugin</artifactId>
+          <configuration>
+            <templateDirectory>${basedir}/src/main/templates</templateDirectory>
+            <generateDirectory>${project.build.directory}/generated-sources/jet</generateDirectory>
+            <includeTemplates>
+                <include>**/*.template</include>
+            </includeTemplates>
+          </configuration>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+...
+</project>
+----------------------------------------
+
+ To generate files, you should execute the generate goal of the Antlr Plugin, i.e.:
+
+----------------------------------------
+mvn jet:generate
+----------------------------------------
+
+* Generate Java Emitters Source Files From Template File(s) As Part Of Your Build
+
+ When you compile your project, the JET Plugin could be executed. You should add the <execution> section as follow:
+ 
+----------------------------------------
+<project>
+...
+  <build>
+    <plugins>
+      ...
+      <plugin>
+          <groupId>com.tikal.maven</groupId>
+          <artifactId>tikal-maven-jet-plugin</artifactId>
+          <configuration>
+            <templateDirectory>${basedir}/src/main/templates</templateDirectory>
+            <generateDirectory>${project.build.directory}/generated-sources/jet</generateDirectory>
+            <includeTemplates>
+                <include>**/*.template</include>
+            </includeTemplates>
+          </configuration>
+          <executions>
+            <execution>
+             <goals>
+               <goal>generate</goal>
+             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      ...
+    </plugins>
+  </build>
+...
+</project>
+----------------------------------------

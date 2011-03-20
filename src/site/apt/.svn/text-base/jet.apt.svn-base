@@ -1,0 +1,181 @@
+ ------
+ Introduction to JET
+ ------
+ Tikal Knowledge
+ ------
+ October 2008
+ ------
+
+Java Emitters Template (JET)
+
+ The source idea was taken from the Eclipse JET technology.\
+ Java Emitter is a Java class for model to text transformation at runtime. It is very convinient way 
+ for generation structural output like xml or source code.\
+ Java Emitters Template (JET) is a technology for generation Emitters from the templates.
+
+* Template
+
+  Template is a text file with JSP like control tags.
+	There are three type of control tags:
+
+	* Directive.
+	
+	* Scriplet.
+	
+	* Expression.
+
+
+** Directive  
+
+----------------------------------------
+<%@ jet class="ClassGenerator" package="org.examples.generators" skeleton="generator.skeleton" %>
+----------------------------------------
+
+	Directive <<jet>> has three attributes:
+		
+	* class - class name of generated emitter. (Mandatory). 
+
+	* package - package name of generated emitter. (Mandatory).
+
+	* skeleton - Skeleton for generated emitter. (Optional).
+
+** Scriplet  
+
+	Scriplet is a raw java code. This code will be inserted into generated emitter as is.
+
+----------------------------------------
+<% int i=1;
+    if (i == 1) {
+        i++;
+    } 
+%>
+----------------------------------------
+		
+----------------------------------------
+<% if (name.equals("Mark") { %> 
+    Hello !!!
+<%}%>
+----------------------------------------
+
+** Expression  
+
+	Expression is a java expression. Returning value will be inserted into generated emitter as string constant.
+
+----------------------------------------
+Hello, <%= "World"%> !!!
+
+Hello, <%= name%> !!!
+----------------------------------------
+
+** Example 1  
+		
+*** Template  
+
+----------------------------------------
+<%@ jet class="ClassGenerator" package="org.examples.generators" %>
+class A {
+    int[] a = new int[3];
+    public A() {
+<% for (int i=0; i < 3; i++) {%>
+        a[<%=i%>] = <%=i%>;
+<%}%>
+    }
+}
+----------------------------------------
+
+
+*** Generated Java Emitter
+
+	Java Emitter class has one mandatory public method generate with return type String.\
+	Arguments for this method may be changed using skeleton. In this example method argument is an input model
+	for the emitter.    
+
+----------------------------------------
+package org.examples.generators;
+
+public class ClassGenerator {
+    public String generate(Object argument)	{
+        StringBuilder builder = new StringBuilder();
+        builder.append("\nclass A\n{\n\tint[] a = new int[3];\n\tpublic A()\n\t{\n");
+        for (int i=0; i < 3; i++) {
+        builder.append("    \ta[");
+        builder.append(i);
+        builder.append("] = ");
+        builder.append(i);
+        builder.append(";\n");
+        }
+        builder.append("\t}\n}\n");
+        return builder.toString();
+    }
+}
+----------------------------------------
+
+
+*** Artifact generated at runtime.
+ 
+----------------------------------------
+class A {
+    int[] a = new int[3];
+    public A() {
+        a[0] = 0;
+        a[1] = 1;
+        a[2] = 2;
+    }
+}
+----------------------------------------
+
+* Skeleton
+
+	There is a default skeleton in case you omit skeleton attribute from the <<jet>> directive tag.
+
+----------------------------------------
+package PACKAGE;
+
+public class CLASS {
+    public String generate(Object argument) {
+        return "";
+    }
+}
+----------------------------------------
+	
+	Best practice is using custom skeleton generate emitter that extends from some Java class, which implements all business logic. 
+
+** Example 2
+
+
+*** Skeleton
+
+----------------------------------------
+package PACKAGE;
+
+public class CLASS extends AbstractGenerator {
+    public String generate() {
+        return "";
+    }
+}
+----------------------------------------
+
+*** Template  
+
+----------------------------------------
+<%@ jet class="ClassGenerator" package="org.examples.generators" skeleton="generator.skeleton"%>
+class <%=<<getClassName()>>%> {
+    int[] a = new int[3];
+    public <%=<<getClassName()>>%>() {
+<% for (int i=0; i < 3; i++) {%>
+        a[<%=i%>] = <%=i%>;
+<%}%>
+    }
+}
+----------------------------------------
+	 
+*** Parent class for the Java Emitter  
+
+----------------------------------------
+class AbstractGenerator {
+    String <<getClassName()>> {
+        return "A";
+    } 
+}
+----------------------------------------	 
+

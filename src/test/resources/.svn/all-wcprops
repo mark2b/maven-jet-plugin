@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/9435/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources
+END
+t1.result
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/repos/!svn/ver/9435/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/t1.result
+END
+t11.include
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/repos/!svn/ver/9435/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/t11.include
+END
+t12.include
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/repos/!svn/ver/9435/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/t12.include
+END
+t1.template
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/repos/!svn/ver/9435/trunk/tikal-suites/tikal-maven/tikal-maven-plugins/tikal-maven-jet-plugin/src/test/resources/t1.template
+END
