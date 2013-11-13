@@ -24,7 +24,7 @@ public class TextElement extends TemplateElement {
 				}
 			}
 		}
-		content = content.replaceAll("\n", "\\\\n").replaceAll("\r", "\\\\r").replaceAll("\t", "\\\\t").replaceAll("\"", "\\\\\"");
+		content = content.replaceAll("\"", "\\\\\"").replaceAll("\n", "\" + NL + \"").replaceAll("\r", "\\\\r").replaceAll("\t", "\\\\t");
 		builder.append("\n\t\tbuilder.append(\"" + content + "\");");
 	}
 
