@@ -132,14 +132,14 @@ public class JetMojo extends AbstractMojo {
 		if (excludeTemplates == null || excludeTemplates.isEmpty()) {
 			return Collections.EMPTY_SET;
 		}
-		return includeTemplates;
+		return excludeTemplates;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Set<File> getTemplates() throws InclusionScanException {
 		if (templates == null) {
 			SourceMapping mapping = new SuffixMapping("template", Collections.EMPTY_SET);
-			SourceInclusionScanner scan = new SimpleSourceInclusionScanner(getIncludesPatterns(), excludeTemplates);
+			SourceInclusionScanner scan = new SimpleSourceInclusionScanner(getIncludesPatterns(), getExcludesPatterns());
 			scan.addSourceMapping(mapping);
 			templates = scan.getIncludedSources(templateDirectory, null);
 		}
