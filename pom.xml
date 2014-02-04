@@ -11,7 +11,7 @@
 	<packaging>maven-plugin</packaging>
 	<name>Tikal Maven JET Plugin</name>
 	<description>Maven 2 plugin for generation template emitters</description>
-	<version>0.4.0</version>
+	<version>0.5.0-SNAPSHOT</version>
 	<url>http://network.tikalk.com/release//tikal-maven-jet-plugin</url>
 	<licenses>
 		<license>
